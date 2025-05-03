@@ -1,6 +1,6 @@
 # Sonido estéreo y ficheros WAVE
 
-## Nom i cognoms
+## Nom i cognoms: Àfrica Abad 
 
 ## El formato WAVE
 
