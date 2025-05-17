@@ -188,7 +188,32 @@ Inserte a continuación el código de los métodos desarrollados en esta tarea, 
 para que se realice el realce sintáctico en Python del mismo (no vale insertar una imagen o una captura de
 pantalla, debe hacerse en formato *markdown*).
 
-##### Código de `estereo2mono()`
+##### Código de `estereo2mono()
+
+```python
+def estereo2mono(ficEste, ficMono, canal=2):
+    numChannels, SampleRate, BitPerSample, data = leeWave(ficEste)
+    data += (0,)
+    
+    if canal == 0:
+        escrWave(ficMono, numChannels=1, SampleRate=SampleRate, BitsPerSample=BitPerSample, data=data[0::2])
+    
+    elif canal == 1:
+        escrWave(ficMono, numChannels=1, SampleRate=SampleRate, BitsPerSample=BitPerSample, data=data[1::2])
+    
+    elif canal == 2:
+        dataLR = ((dataL + dataR) // 2 for dataL, dataR in zip(data[::2], data[1::2]))
+        escrWave(ficMono, numChannels=1, SampleRate=SampleRate, BitsPerSample=BitPerSample, data=list(dataLR))
+    
+    elif canal == 3:
+        dataLR = ((dataL - dataR) // 2 for dataL, dataR in zip(data[::2], data[1::2]))
+        escrWave(ficMono, numChannels=1, SampleRate=SampleRate, BitsPerSample=BitPerSample, data=list(dataLR))
+```
+
+
+
+
+
 
 ##### Código de `mono2estereo()`
 
